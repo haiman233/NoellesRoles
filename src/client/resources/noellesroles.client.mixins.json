@@ -10,7 +10,10 @@
     "morphling.MorphlingScreenMixin",
     "phantom.PhantomHudMixin",
     "swapper.SwapperScreenMixin",
-    "voodoo.VoodoScreenMixin"
+    "voodoo.VoodoScreenMixin",
+    "seer.SeerHudMixin",
+    "seer.SeerResetMixin",
+    "coroner.CoronerHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

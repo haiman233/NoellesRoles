@@ -33,7 +33,8 @@
       "noellesroles:bartender",
       "noellesroles:ability",
       "noellesroles:voodoo",
-      "noellesroles:config"
+      "noellesroles:config",
+      "noellesroles:body_death_reason"
     ]
   },
   "mixins": [

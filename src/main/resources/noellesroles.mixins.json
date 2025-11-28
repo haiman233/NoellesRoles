@@ -6,6 +6,7 @@
   "mixins": [
     "bartender.BartenderReseterMixin",
     "bartender.CocktailItemMixin",
+    "coroner.CoronerAddDeathReasonMixin",
     "host.MasterKeyDropMixin",
     "host.MasterKeySmallDoorMixin",
     "host.MasterKeyTrainDoorMixin",

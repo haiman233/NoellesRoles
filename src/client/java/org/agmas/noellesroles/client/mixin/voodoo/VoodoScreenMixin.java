@@ -42,7 +42,7 @@ public abstract class VoodoScreenMixin extends LimitedHandledScreen<PlayerScreen
     void b(CallbackInfo ci) {
         GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorldComponent.isRole(player,Noellesroles.VOODOO)) {
-            List<UUID> entries = new ArrayList<>(TMMClient.PLAYER_ENTRIES_CACHE.keySet());
+            List<UUID> entries = new ArrayList<>(MinecraftClient.getInstance().player.networkHandler.getPlayerUuids());
             entries.removeIf((e) -> e.equals(player.getUuid()));
             int apart = 36;
             int x = ((LimitedInventoryScreen)(Object)this).width / 2 - (entries.size()) * apart / 2 + 9;
@@ -50,7 +50,7 @@ public abstract class VoodoScreenMixin extends LimitedHandledScreen<PlayerScreen
             int y = shouldBeY + 80;
 
             for(int i = 0; i < entries.size(); ++i) {
-                VoodooPlayerWidget child = new VoodooPlayerWidget(((LimitedInventoryScreen)(Object)this), x + apart * i, y, entries.get(i), TMMClient.PLAYER_ENTRIES_CACHE.get(entries.get(i)), player.getWorld(), i);
+                VoodooPlayerWidget child = new VoodooPlayerWidget(((LimitedInventoryScreen)(Object)this), x + apart * i, y, entries.get(i), MinecraftClient.getInstance().player.networkHandler.getPlayerListEntry(entries.get(i)), player.getWorld(), i);
                 addDrawableChild(child);
             }
         }

@@ -6,6 +6,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
 import org.agmas.noellesroles.AbilityPlayerComponent;
 import org.agmas.noellesroles.Noellesroles;
@@ -26,10 +27,10 @@ public abstract class PhantomHudMixin {
         AbilityPlayerComponent abilityPlayerComponent = (AbilityPlayerComponent) AbilityPlayerComponent.KEY.get(MinecraftClient.getInstance().player);
         if (gameWorldComponent.isRole(MinecraftClient.getInstance().player, Noellesroles.PHANTOM)) {
             int drawY = context.getScaledWindowHeight();
-            String line = "Use " + NoellesrolesClient.abilityBind.getBoundKeyTranslationKey() + " to go invisible!";
+            Text line = Text.literal("Use ").append(Text.translatable(NoellesrolesClient.abilityBind.getBoundKeyTranslationKey()).append(Text.literal(" to go invisible!")));
 
             if (abilityPlayerComponent.cooldown > 0) {
-                line = "Ability usable in " + abilityPlayerComponent.cooldown/20 + "s";
+                line = Text.literal("Ability usable in " + abilityPlayerComponent.cooldown/20 + "s");
             }
 
             drawY -= getTextRenderer().getWrappedLinesHeight(line, 999999);

@@ -1,5 +1,6 @@
 package org.agmas.noellesroles.config;
 
+import dev.doctor4t.trainmurdermystery.game.GameConstants;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -22,6 +23,12 @@ public class NoellesRolesConfig {
     public boolean insanePlayersSeeMorphs = true;
     @SerialEntry(comment = "Allows the shitpost roles to retain their disable/enable state after a server restart")
     public boolean shitpostRoles = false;
+
+    @SerialEntry(comment = "Starting cooldown (in ticks)")
+    public int generalCooldownTicks = GameConstants.getInTicks(0,30);
+
+    @SerialEntry(comment = "Seer Starting cooldown (in ticks)")
+    public int seerCooldownTicks = GameConstants.getInTicks(1,0);
 
 
 }

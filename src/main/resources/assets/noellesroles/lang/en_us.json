@@ -40,8 +40,25 @@
   "announcement.role.swapper": "Swapper",
   "announcement.win.swapper": "Killers Win!",
 
+  "announcement.goals.coroner": "Get information from dead bodies.",
+  "announcement.role.coroner": "Coroner",
+  "announcement.win.coroner": "Passengers Win!",
+
+  "announcement.goals.seer": "Check other player's roles.",
+  "announcement.role.seer": "Seer",
+  "announcement.win.seer": "Passengers Win!",
+
 
   "item.noellesroles.fake_revolver": "Fake Revolver",
   "item.noellesroles.master_key": "Master Key",
-  "item.noellesroles.fake_knife": "Fake Knife"
+  "item.noellesroles.fake_knife": "Fake Knife",
+
+  "death_reason.trainmurdermystery.gun_shot": "a bullet.",
+  "death_reason.trainmurdermystery.knife_stab": "a knife!",
+  "death_reason.trainmurdermystery.generic": "unknown causes.",
+  "death_reason.trainmurdermystery.bat_hit": "blunt force!",
+  "death_reason.trainmurdermystery.grenade": "an explosion!",
+  "death_reason.trainmurdermystery.poison": "poison!",
+  "death_reason.trainmurdermystery.fell_out_of_train": "being ran over.",
+  "death_reason.noellesroles.voodoo": "voodoo magic."
 }
