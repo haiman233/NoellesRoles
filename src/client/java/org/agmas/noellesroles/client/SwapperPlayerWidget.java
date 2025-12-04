@@ -36,7 +36,6 @@ public class SwapperPlayerWidget extends ButtonWidget{
                     ClientPlayNetworking.send(new SwapperC2SPacket(playerChoiceOne, disguiseTarget.getUuid()));
                 } else {
                     playerChoiceOne = disguiseTarget.getUuid();
-                    Log.info(LogCategory.GENERAL, "clicked");
                 }
             }
         }, DEFAULT_NARRATION_SUPPLIER);

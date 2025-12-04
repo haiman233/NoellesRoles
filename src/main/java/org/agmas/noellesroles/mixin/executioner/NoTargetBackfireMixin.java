@@ -16,12 +16,10 @@ import java.util.UUID;
 public class NoTargetBackfireMixin {
     @Redirect(method = "receive(Ldev/doctor4t/trainmurdermystery/util/GunShootPayload;Lnet/fabricmc/fabric/api/networking/v1/ServerPlayNetworking$Context;)V", at = @At(value = "INVOKE", target = "Ldev/doctor4t/trainmurdermystery/cca/GameWorldComponent;isInnocent(Lnet/minecraft/entity/player/PlayerEntity;)Z", ordinal = 0))
     private boolean jesterJest(GameWorldComponent instance, PlayerEntity player) {
-
         GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(player.getWorld());
         for (UUID uuid : gameWorldComponent.getAllWithRole(Noellesroles.EXECUTIONER)) {
             PlayerEntity executioner = player.getWorld().getPlayerByUuid(uuid);
             if (executioner == null) continue;
-            if (GameFunctions.isPlayerAliveAndSurvival(executioner)) continue;
             ExecutionerPlayerComponent executionerPlayerComponent = ExecutionerPlayerComponent.KEY.get(executioner);
             if (executionerPlayerComponent.target.equals(player.getUuid())) {
                 return false;

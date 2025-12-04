@@ -4,8 +4,12 @@
   "package": "org.agmas.noellesroles.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "GiveCoinsOnMoodCompletionMixin",
+    "bartender.BartenderPlayerShopComponentMixin",
     "bartender.BartenderReseterMixin",
     "bartender.CocktailItemMixin",
+    "bartender.DefenseVialApplyMixin",
+    "bartender.PoisonToHealsMixin",
     "coroner.CoronerAddDeathReasonMixin",
     "executioner.ExecutionerConfirmMixin",
     "executioner.NoTargetBackfireMixin",

@@ -21,9 +21,11 @@ public class BartenderPlayerComponent implements AutoSyncedComponent, ServerTick
     public static final ComponentKey<BartenderPlayerComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(Noellesroles.MOD_ID, "bartender"), BartenderPlayerComponent.class);
     private final PlayerEntity player;
     public int glowTicks = 0;
+    public int armor = 0;
 
     public void reset() {
         this.glowTicks = 0;
+        this.armor = 0;
         this.sync();
     }
 
@@ -42,9 +44,16 @@ public class BartenderPlayerComponent implements AutoSyncedComponent, ServerTick
         if (this.glowTicks > 0) {
             --this.glowTicks;
 
-            this.sync();
         }
+        this.sync();
     }
+
+    public boolean giveArmor() {
+        armor = 1;
+        this.sync();
+        return true;
+    }
+
 
     public boolean startGlow() {
         setGlowTicks(GameConstants.getInTicks(0,40));
@@ -60,9 +69,11 @@ public class BartenderPlayerComponent implements AutoSyncedComponent, ServerTick
 
     public void writeToNbt(@NotNull NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         tag.putInt("glowTicks", this.glowTicks);
+        tag.putInt("armor", this.armor);
     }
 
     public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         this.glowTicks = tag.contains("glowTicks") ? tag.getInt("glowTicks") : 0;
+        this.armor = tag.contains("armor") ? tag.getInt("armor") : 0;
     }
 }

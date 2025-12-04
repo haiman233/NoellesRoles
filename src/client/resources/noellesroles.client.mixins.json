@@ -5,13 +5,12 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "InstinctMixin",
+    "bartender.BartenderShopMixin",
     "coroner.CoronerHudMixin",
     "morphling.MorphlingRendererMixin",
     "morphling.MorphlingRoleNameRendererMixin",
     "morphling.MorphlingScreenMixin",
     "phantom.PhantomHudMixin",
-    "seer.SeerHudMixin",
-    "seer.SeerResetMixin",
     "swapper.SwapperScreenMixin",
     "voodoo.VoodoScreenMixin"
   ],
@@ -22,6 +21,10 @@
     "requireAnnotations": true
   },
   "mixins": [
-    "executioner.ExecutionerHudMixin"
+    "bartender.BartenderStoreRendererMixin",
+    "bartender.DefenseVialViewMixin",
+    "executioner.ExecutionerHudMixin",
+    "executioner.ExecutionerMoodRenderer",
+    "jester.JesterMoodRenderer"
   ]
 }
