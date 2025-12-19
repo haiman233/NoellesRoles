@@ -1,14 +1,20 @@
 package org.agmas.noellesroles.item;
 
-import dev.doctor4t.trainmurdermystery.game.GameFunctions;
-import dev.doctor4t.trainmurdermystery.index.TMMSounds;
-import dev.doctor4t.trainmurdermystery.util.KnifeStabPayload;
+import dev.doctor4t.wathe.Wathe;
+import dev.doctor4t.wathe.game.GameFunctions;
+import dev.doctor4t.wathe.index.WatheCosmetics;
+import dev.doctor4t.wathe.index.WatheSounds;
+import dev.doctor4t.wathe.item.KnifeItem;
+import dev.doctor4t.wathe.util.KnifeStabPayload;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
@@ -25,8 +31,21 @@ public class FakeKnifeItem extends Item {
     public TypedActionResult<ItemStack> use(World world, @NotNull PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         user.setCurrentHand(hand);
-        user.playSound(TMMSounds.ITEM_KNIFE_PREPARE, 1.0F, 1.0F);
+        user.playSound(WatheSounds.ITEM_KNIFE_PREPARE, 1.0F, 1.0F);
         return TypedActionResult.consume(itemStack);
+    }
+
+    public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
+        if (clickType == ClickType.RIGHT && otherStack.isEmpty()) {
+            if (Wathe.isSupporter(player)) {
+                KnifeItem.Skin currentSkin = KnifeItem.Skin.fromString(WatheCosmetics.getSkin(stack));
+                WatheCosmetics.setSkin(player.getUuid(), stack, KnifeItem.Skin.getNext(currentSkin).getName());
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public UseAction getUseAction(ItemStack stack) {

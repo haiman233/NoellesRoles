@@ -1,7 +1,7 @@
 package org.agmas.noellesroles.client.ui.guesser;
 
-import dev.doctor4t.trainmurdermystery.api.TMMRoles;
-import dev.doctor4t.trainmurdermystery.client.gui.screen.ingame.LimitedInventoryScreen;
+import dev.doctor4t.wathe.api.WatheRoles;
+import dev.doctor4t.wathe.client.gui.screen.ingame.LimitedInventoryScreen;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -62,7 +62,7 @@ public class GuesserRoleWidget extends TextFieldWidget {
         stopClosing = isSelected();
         if (GuesserPlayerWidget.selectedPlayer != null) {
             ArrayList<String> suggestions = new ArrayList<>();
-            TMMRoles.ROLES.forEach((m) -> {
+            WatheRoles.ROLES.forEach((m) -> {
                 if (Noellesroles.KILLER_SIDED_NEUTRALS.contains(m)) return;
                 if (Harpymodloader.SPECIAL_ROLES.contains(m)) return;
                 if (m.canUseKiller()) return;

@@ -2,7 +2,7 @@ package org.agmas.noellesroles.client.mixin.guesser;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.doctor4t.trainmurdermystery.client.gui.screen.ingame.LimitedHandledScreen;
+import dev.doctor4t.wathe.client.gui.screen.ingame.LimitedHandledScreen;
 import net.minecraft.client.option.KeyBinding;
 import org.agmas.noellesroles.client.ui.guesser.GuesserRoleWidget;
 import org.spongepowered.asm.mixin.Mixin;

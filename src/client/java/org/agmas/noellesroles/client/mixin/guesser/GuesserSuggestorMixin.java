@@ -3,7 +3,7 @@ package org.agmas.noellesroles.client.mixin.guesser;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import dev.doctor4t.trainmurdermystery.api.TMMRoles;
+import dev.doctor4t.wathe.api.WatheRoles;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatInputSuggestor;
@@ -47,7 +47,7 @@ public abstract class GuesserSuggestorMixin {
     void a(CallbackInfo ci) {
         if (textField instanceof GuesserRoleWidget) {
             messages.clear();
-            TMMRoles.ROLES.forEach((m) -> {
+            WatheRoles.ROLES.forEach((m) -> {
                 if (Noellesroles.KILLER_SIDED_NEUTRALS.contains(m)) return;
                 if (Harpymodloader.SPECIAL_ROLES.contains(m)) return;
                 if (m.canUseKiller()) return;
