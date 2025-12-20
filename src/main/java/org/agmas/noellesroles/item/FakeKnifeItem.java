@@ -35,19 +35,6 @@ public class FakeKnifeItem extends Item {
         return TypedActionResult.consume(itemStack);
     }
 
-    public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
-        if (clickType == ClickType.RIGHT && otherStack.isEmpty()) {
-            if (Wathe.isSupporter(player)) {
-                KnifeItem.Skin currentSkin = KnifeItem.Skin.fromString(WatheCosmetics.getSkin(stack));
-                WatheCosmetics.setSkin(player.getUuid(), stack, KnifeItem.Skin.getNext(currentSkin).getName());
-            }
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.SPEAR;
     }

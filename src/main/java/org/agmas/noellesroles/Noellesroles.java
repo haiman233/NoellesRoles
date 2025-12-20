@@ -43,6 +43,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.Vec3d;
 import org.agmas.harpymodloader.Harpymodloader;
+import org.agmas.harpymodloader.component.WorldModifierComponent;
 import org.agmas.harpymodloader.config.HarpyModLoaderConfig;
 import org.agmas.harpymodloader.events.ModdedRoleAssigned;
 import org.agmas.harpymodloader.events.ModifierAssigned;
@@ -90,6 +91,7 @@ public class Noellesroles implements ModInitializer {
     public static Identifier BETTER_VIGILANTE_ID = Identifier.of(MOD_ID, "better_vigilante");
     public static Identifier TINY_ID = Identifier.of(MOD_ID, "tiny");
     public static Identifier CHAMELEON_ID = Identifier.of(MOD_ID, "chameleon");
+    public static Identifier SPEEDY_ID = Identifier.of(MOD_ID, "speedy");
     public static Identifier THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES_ID = Identifier.of(MOD_ID, "the_insane_damned_paranoid_killer");
 
     public static HashMap<Role, RoleAnnouncementTexts.RoleAnnouncementText> roleRoleAnnouncementTextHashMap = new HashMap<>();
@@ -113,13 +115,14 @@ public class Noellesroles implements ModInitializer {
 
     public static Role VULTURE =WatheRoles.registerRole(new Role(VULTURE_ID, new Color(181, 103, 0).getRGB(),false,false,Role.MoodType.FAKE, WatheRoles.CIVILIAN.getMaxSprintTime(),true));
     public static Role BETTER_VIGILANTE =WatheRoles.registerRole(new Role(BETTER_VIGILANTE_ID, new Color(0, 255, 255).getRGB(),true,false,Role.MoodType.REAL, WatheRoles.CIVILIAN.getMaxSprintTime(),false));
-    public static Role GUESSER =WatheRoles.registerRole(new Role(GUESSER_ID, new Color(158, 43, 25, 191).getRGB(),false,true, Role.MoodType.FAKE,Integer.MAX_VALUE,true));
+    //public static Role GUESSER =WatheRoles.registerRole(new Role(GUESSER_ID, new Color(158, 43, 25, 191).getRGB(),false,true, Role.MoodType.FAKE,Integer.MAX_VALUE,true));
 
     public static Role MIMIC = WatheRoles.registerRole(new Role(MIMIC_ID, new Color(255, 137, 155).getRGB(),true,false,Role.MoodType.REAL, WatheRoles.CIVILIAN.getMaxSprintTime(),false));
 
 
-    public static Modifier TINY = HMLModifiers.registerModifier(new Modifier(TINY_ID, new Color(255, 223, 142).getRGB(),null,null,false,false));
-    //public static Modifier CHAMELEON = HMLModifiers.registerModifier(new Modifier(CHAMELEON_ID, new Color(198, 255, 137).getRGB(),null,null,false,false));
+    public static Modifier TINY = HMLModifiers.registerModifier(new Modifier(TINY_ID, new Color(255, 223, 142).getRGB(), new ArrayList<>(List.of(MORPHLING)),null,false,false));
+    public static Modifier CHAMELEON = HMLModifiers.registerModifier(new Modifier(CHAMELEON_ID, new Color(198, 255, 137).getRGB(),null,null,false,false));
+    public static Modifier GUESSER = HMLModifiers.registerModifier(new Modifier(GUESSER_ID, new Color(158, 43, 25, 191).getRGB(),null,null,true,false));
 
 
     public static final CustomPayload.Id<MorphC2SPacket> MORPH_PACKET = MorphC2SPacket.ID;
@@ -174,6 +177,10 @@ public class Noellesroles implements ModInitializer {
         registerEvents();
 
         registerPackets();
+
+        if (NoellesRolesConfig.HANDLER.instance().allowCivillianGuessers) {
+            GUESSER.killerOnly = false;
+        }
         //NoellesRolesEntities.init();
 
     }
@@ -391,7 +398,8 @@ public class Noellesroles implements ModInitializer {
 
         ServerPlayNetworking.registerGlobalReceiver(Noellesroles.GUESS_PACKET, (payload, context) -> {
             GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(context.player().getWorld());
-            if (gameWorldComponent.isRole(context.player(), GUESSER)) {
+            WorldModifierComponent worldModifierComponent = WorldModifierComponent.KEY.get(context.player().getWorld());
+            if (worldModifierComponent.isRole(context.player(), GUESSER)) {
                 if (payload.player() != null) {
                     if (context.player().getWorld().getPlayerByUuid(payload.player()) != null) {
                         ServerPlayerEntity target = (ServerPlayerEntity) context.player().getWorld().getPlayerByUuid(payload.player());
@@ -402,8 +410,11 @@ public class Noellesroles implements ModInitializer {
 
                             if (!wrong) {
                                 wrong = !gameWorldComponent.getRole(target).identifier().getPath().equalsIgnoreCase(payload.guess());
-                                if (KILLER_SIDED_NEUTRALS.contains(gameWorldComponent.getRole(target))) wrong = true;
-                                if (gameWorldComponent.getRole(target).canUseKiller()) wrong = true;
+
+                                if (!gameWorldComponent.isInnocent(player)) {
+                                    if (KILLER_SIDED_NEUTRALS.contains(gameWorldComponent.getRole(target))) wrong = true;
+                                    if (gameWorldComponent.getRole(target).canUseKiller()) wrong = true;
+                                }
                                 if (Harpymodloader.SPECIAL_ROLES.contains(gameWorldComponent.getRole(target))) wrong = true;
                             }
                             if (!wrong) {

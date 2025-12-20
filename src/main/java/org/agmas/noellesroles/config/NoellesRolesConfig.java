@@ -33,6 +33,9 @@ public class NoellesRolesConfig {
     @SerialEntry(comment = "Makes voodoos act like Evil players when shot by a revolver (no backfire, no gun lost)")
     public boolean voodooShotLikeEvil = true;
 
+    @SerialEntry(comment = "Civillians can get the guesser modifier.")
+    public boolean allowCivillianGuessers = false;
+
     @SerialEntry(comment = "How the guesser dies after an incorrect guess.\n\"none\" (default) - nothing happens, 2 minute cooldown applied\n\"death\" kills the player with a voodoo death message\n\"explode\" explodes the guesser, killing anyone nearby")
     public String guesserDiesAfterIncorrectGuess = "none";
 

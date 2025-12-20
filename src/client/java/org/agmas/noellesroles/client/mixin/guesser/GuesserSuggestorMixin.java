@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.doctor4t.wathe.api.WatheRoles;
+import dev.doctor4t.wathe.cca.GameWorldComponent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatInputSuggestor;
@@ -49,8 +50,11 @@ public abstract class GuesserSuggestorMixin {
             messages.clear();
             WatheRoles.ROLES.forEach((m) -> {
                 if (Noellesroles.KILLER_SIDED_NEUTRALS.contains(m)) return;
-                if (Harpymodloader.SPECIAL_ROLES.contains(m)) return;
-                if (m.canUseKiller()) return;
+                GameWorldComponent gameWorldComponent = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+                if (!gameWorldComponent.isInnocent(MinecraftClient.getInstance().player)) {
+                    if (Noellesroles.KILLER_SIDED_NEUTRALS.contains(m)) return;
+                    if (m.canUseKiller()) return;
+                }
                 if (m.identifier().getPath().startsWith(textField.getText()) || textField.getText().isEmpty()) {
                     MutableText s = Text.literal(m.identifier().getPath());
                     if (!MinecraftClient.getInstance().getLanguageManager().getLanguage().startsWith("en_")) {

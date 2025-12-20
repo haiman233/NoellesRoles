@@ -1,6 +1,7 @@
 package org.agmas.noellesroles.client.ui.guesser;
 
 import dev.doctor4t.wathe.api.WatheRoles;
+import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.client.gui.screen.ingame.LimitedInventoryScreen;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
@@ -63,9 +64,12 @@ public class GuesserRoleWidget extends TextFieldWidget {
         if (GuesserPlayerWidget.selectedPlayer != null) {
             ArrayList<String> suggestions = new ArrayList<>();
             WatheRoles.ROLES.forEach((m) -> {
-                if (Noellesroles.KILLER_SIDED_NEUTRALS.contains(m)) return;
                 if (Harpymodloader.SPECIAL_ROLES.contains(m)) return;
-                if (m.canUseKiller()) return;
+                GameWorldComponent gameWorldComponent = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+                if (!gameWorldComponent.isInnocent(MinecraftClient.getInstance().player)) {
+                    if (Noellesroles.KILLER_SIDED_NEUTRALS.contains(m)) return;
+                    if (m.canUseKiller()) return;
+                }
                 if (m.identifier().getPath().startsWith(getText()) || getText().isEmpty())
                     suggestions.add(m.identifier().getPath());
             });
