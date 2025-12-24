@@ -10,6 +10,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import org.agmas.noellesroles.item.FakeKnifeItem;
+import org.agmas.noellesroles.item.RoleMineItem;
 
 public class ModItems {
     public static void init() {
@@ -37,7 +38,7 @@ public class ModItems {
             "defense_vial"
     );
     public static final Item ROLE_MINE = register(
-            new Item(new Item.Settings().maxCount(1)),
+            new RoleMineItem(new Item.Settings().maxCount(1)),
             "role_mine"
     );
     public static Item register(Item item, String id) {

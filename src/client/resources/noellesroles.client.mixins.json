@@ -7,6 +7,8 @@
     "InstinctMixin",
     "bartender.BartenderShopMixin",
     "bartender.DefenseVialHandMixin",
+    "chameleon.ChameleonCapeMixin",
+    "chameleon.ChameleonShadowMixin",
     "chameleon.ChameleonSkinArmMixin",
     "chameleon.ChameleonSkinMixin",
     "conductor.MasterKeyInvisibilityMixin",
@@ -23,6 +25,9 @@
     "phantom.PhantomRattatoulieMixin",
     "recaller.RecallerHudMixin",
     "swapper.SwapperScreenMixin",
+    "trapper.TrapperHandMixin",
+    "trapper.TrapperInvisPaperMixin",
+    "trapper.TrapperShopMixin",
     "voodoo.VoodoScreenMixin",
     "vulture.VultureEatenBodyMixin",
     "vulture.VultureHudMixin"
